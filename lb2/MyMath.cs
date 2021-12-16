@@ -24,54 +24,32 @@ namespace lb2
 
         public static double Sin(double x)
         {
-            if (x > 0)
+            const double eps = 1e-15;
+            double sum = 0;
+            double r = x;
+            int n = 1;
+            while (Math.Abs(r) > eps)
             {
-                int kOfPi = 0;
-                for (double i = 0; i < x; i += Math.PI)
-                {
-                    kOfPi = Convert.ToInt32(i / Math.PI);
-                }
-                if (kOfPi % 2 == 0)
-                {
-                    return Math.Sqrt(1 - Math.Pow(Cos(x), 2));
-                }
-                else
-                {
-                    return Math.Sqrt(1 - Math.Pow(Cos(x), 2)) * -1;
-                }
+                sum = sum + r;
+                n = n + 2;
+                r = -r * x * x / (n * (n - 1));
             }
-            if (x < 0)
-            {
-                int kOfPi = 0;
-                for (double i = 0; i > x; i -= Math.PI)
-                {
-                    kOfPi = Convert.ToInt32(i / Math.PI);
-                }
-                if (kOfPi % 2 == 0)
-                {
-                    return Math.Sqrt(1 - Math.Pow(Cos(x), 2)) * -1;
-                }
-                else
-                {
-                    return Math.Sqrt(1 - Math.Pow(Cos(x), 2));
-                }
-            }
-            return 0;
+            return sum;
         }
-        public static double Cot(double x)
+        public static double Cot(double x) //котангенс
         {
             return Cos(x) / Sin(x);
         }
 
-        public static double Csc(double x)
+        public static double Csc(double x) //косеканс
         {
             return 1 / Math.Sqrt(1 - Math.Pow(Cos(x), 2));
         }
-        public static double Sec(double x)
+        public static double Sec(double x)  //секанс
         {
             return 1 / Cos(x);
         }
-        public static double Ln(double x)
+        public static double Ln(double x) //натуральный логарифм
         {
             if (x == 0)
             {
@@ -103,7 +81,7 @@ namespace lb2
             }
             return 2 * totalValue;
         }
-        public static double Log(double x, double y)
+        public static double Log(double x, double y) //логарифм
         {
             if ((y > 0) && (y != 1) && (x > 0))
             {

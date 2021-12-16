@@ -12,8 +12,40 @@ namespace lb2
     {
         static string path = @"E:\Inctitute\4 курс 1 семестр\ТПО\лб2\результаты\";
         static MyMath result = new MyMath();
+
         static void Main(string[] args)
         {
+            double e_left = Math.Round(-(Math.PI / (double)2), 2, MidpointRounding.AwayFromZero) ;
+            double e_right = Math.Round((Math.PI / (double)2), 2, MidpointRounding.AwayFromZero);
+            int c = 0;
+            int cc = 0;
+            for (double x = e_left; x <= e_right; x += 0.01)
+            {
+                if (x != 0)
+                {
+                    double x1 = Math.Round(result.CalculateResult(MyMath.Sin, MyMath.Cos, MyMath.Ln, MyMath.Log, x), 3, MidpointRounding.AwayFromZero);
+                    double x2 = Math.Round(result.CalculateResult(Math.Sin, Math.Cos, Math.Log, Math.Log, x),  3, MidpointRounding.AwayFromZero);
+                    if (x1.Equals(x2))
+                    {
+                        c++;
+                    }
+                    else
+                    {
+                        double xxx1 = MyMath.Sin(x);
+                        double xxx2 = MyMath.Cos(x);
+                        double xxx3 = Math.Sin(x);
+                        double xxx4 = Math.Cos(x);
+
+                        double erewr2 = MyMath.Sin(x) / MyMath.Cos(x);
+                        double erewr = Math.Tan(x);
+                    }
+
+                    cc++;
+                }
+            }
+
+
+
             int value_left = -10;
             int value_right = 10;
             double step = 0.01;
