@@ -6,8 +6,5 @@ before_build:
 build_script:
   - make test
 
-test_script:
-  - E:\Inctitute\4 курс 1 семестр\ТПО\лб2\lb2\lb2\MyTests.cs
-
 build:
   verbosity: minimal
