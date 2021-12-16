@@ -94,34 +94,22 @@ namespace lb2
         [Test]
         public void Count_result_Where_X_IsLessOrEqualZero()
         {
-            for (double x = -10; x < -0.01; x += 0.01)
-            {
-                if (x == 0)
-                {
-                    x += 0.1;
-                }
-                Assert.AreEqual
+            int x = 5;
+            Assert.AreEqual
                 (
                     Math.Round(Count_result_MyMath(x), 4, MidpointRounding.AwayFromZero),
                     Math.Round(Count_result_Math(x), 4, MidpointRounding.AwayFromZero)
                 );
-            }
         }
         [Test]
         public void Count_result_Where_X_IsMoreThanZero()
         {
-            for (double x = 0.01; x <= 10; x += 0.01)
-            {
-                if (x == 0)
-                {
-                    x += 0.1;
-                }
-                Assert.AreEqual
-                (
-                    Math.Round(Count_result_MyMath(x), 4, MidpointRounding.AwayFromZero),
-                    Math.Round(Count_result_Math(x), 4, MidpointRounding.AwayFromZero)
-                );
-            }
+            int x = 5;
+            Assert.AreEqual
+            (
+                Math.Round(Count_result_MyMath(x), 4, MidpointRounding.AwayFromZero),
+                Math.Round(Count_result_Math(x), 4, MidpointRounding.AwayFromZero)
+            );
         }
     }
 }
