@@ -49,6 +49,20 @@ namespace lb2
         {
             return 1 / Cos(x);
         }
+
+        public static double Arctn(double x)
+        {
+            const double e = 0.000000000000001;
+            double summ = x;
+            double sum = x;
+            for (int n = 0; Math.Abs(summ) > e; n++)
+            {
+                summ *= -1 * x * x;
+                sum += summ / (2 * n + 3);
+            }
+            return sum;
+        }
+
         public static double Ln(double x) //натуральный логарифм
         {
             if (x == 0)
@@ -105,6 +119,8 @@ namespace lb2
             }
             return double.NaN;
         }
+
+
 
         public double CalculateResult(Func<double, double> CountSin, Func<double, double> CountCos, Func<double, double> LnCount, Func<double, double, double> LogCount, double x)
         {

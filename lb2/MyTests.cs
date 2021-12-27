@@ -53,8 +53,8 @@ namespace lb2
         [Test]
         public void Cot()
         {
-            double e_left = -(Math.PI / (double)2);
-            double e_right = Math.PI / (double)2;
+            double e_left = Math.Round(-(Math.PI / (double)2), 2, MidpointRounding.AwayFromZero);
+            double e_right = Math.Round((Math.PI / (double)2), 2, MidpointRounding.AwayFromZero);
             for (double x = e_left; x <= e_right; x += 0.01)
             {
                 Assert.AreEqual
@@ -64,6 +64,20 @@ namespace lb2
                 );
             }
         }
+
+        [Test]
+        public void Arctn()
+        {
+            for (double x = 0.01; x < 1; x += 0.01) //область определения модуль(х) <=1 и !=n, где n=0,1,2
+            {
+                Assert.AreEqual
+                (
+                    Math.Round(MyMath.Arctn(x), 8, MidpointRounding.AwayFromZero),
+                    Math.Round(Math.Atan(x), 8, MidpointRounding.AwayFromZero)
+                );
+            }
+        }
+
         [Test]
         public void Ln()
         {
@@ -92,24 +106,33 @@ namespace lb2
             }
         }
         [Test]
-        public void Count_result_Where_X_IsLessOrEqualZero()
+        public void Count_result_Where_X_IsLessThenZero()
         {
-            int x = 5;
-            Assert.AreEqual
-                (
-                    Math.Round(Count_result_MyMath(x), 4, MidpointRounding.AwayFromZero),
-                    Math.Round(Count_result_Math(x), 4, MidpointRounding.AwayFromZero)
-                );
+            //область определения котангенса и косеканса все чилса кроме: Pi*n, включая 0
+            double e_left = Math.Round(-(Math.PI / (double)2), 2, MidpointRounding.AwayFromZero); //область определения секанса все числа кроме |x|<Pi/2
+            for (double x = e_left; x < 0; x += 0.01)
+            {
+                Assert.AreEqual
+                    (
+                        Math.Round(Count_result_MyMath(x), 3, MidpointRounding.AwayFromZero),
+                        Math.Round(Count_result_Math(x), 3, MidpointRounding.AwayFromZero)
+                    );
+            }
         }
         [Test]
         public void Count_result_Where_X_IsMoreThanZero()
         {
-            int x = 5;
-            Assert.AreEqual
+            double e_right = Math.Round((Math.PI / (double)2), 2, MidpointRounding.AwayFromZero);
+            for (double x = 0.01; x < e_right; x += 0.01)//область определения секанса все числа кроме |x|<Pi/2
+            {
+                Assert.AreEqual
             (
-                Math.Round(Count_result_MyMath(x), 4, MidpointRounding.AwayFromZero),
-                Math.Round(Count_result_Math(x), 4, MidpointRounding.AwayFromZero)
+                Math.Round(Count_result_MyMath(x), MidpointRounding.AwayFromZero),
+                Math.Round(Count_result_Math(x), MidpointRounding.AwayFromZero)
             );
+            }
         }
     }
 }
+
+

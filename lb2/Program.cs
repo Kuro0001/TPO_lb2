@@ -15,6 +15,7 @@ namespace lb2
 
         static void Main(string[] args)
         {
+
             int value_left = -10;
             int value_right = 10;
             double step = 0.01;
